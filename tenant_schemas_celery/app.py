@@ -16,8 +16,7 @@ def get_schema_name_from_task(task, kwargs):
         # Pop it from the kwargs since tasks don't except the additional kwarg.
         # This change is transparent to the system.
         return kwargs.pop('_schema_name', None)
-
-    return (task.request.headers or {}).get('_schema_name')
+    return (task.request.headers or {}).get('_schema_name', task.request.get('_schema_name'))
 
 
 def switch_schema(task, kwargs, **kw):
